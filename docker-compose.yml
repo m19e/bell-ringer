@@ -9,5 +9,7 @@ services:
         volumes:
             - .:/workdir
             - ./.clasprc.json:/root/.clasprc.json
+            - /etc/group:/etc/group:ro
+            - /etc/passwd:/etc/passwd:ro
         working_dir: /workdir
         command: tail -f /dev/null
