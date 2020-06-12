@@ -6,3 +6,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
+        container_name: "gas-build"
+        tty: true
+        volumes:
+            - "../src:/opt/src"
