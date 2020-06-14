@@ -4,6 +4,6 @@ function testGreeter() {
     const user = "Kaho";
     Logger.log(greeter(user));
 
-    const age = 30;
+    const age = 12;
     Logger.log(greeter(age));
 }
