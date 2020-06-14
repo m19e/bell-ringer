@@ -11,7 +11,9 @@ function testGreeter() {
 }
 
 const main = () => {
-    const address = PropertiesService.getScriptProperties().getProperty("TARGET_MAIL_ADDRESS")
+    const address = PropertiesService.getScriptProperties().getProperty(
+        "TARGET_MAIL_ADDRESS"
+    );
     const query = `from:${address}`;
     const threads = GmailApp.search(query, 0, 10);
     const messagesForThreads = GmailApp.getMessagesForThreads(threads);
@@ -29,6 +31,6 @@ const main = () => {
     }
 
     for (const value of values) {
-        Logger.log(value[2]);
+        Logger.log(value);
     }
 };
