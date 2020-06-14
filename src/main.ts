@@ -1,6 +1,4 @@
-const greeter = (person: string) => {
-    return `Hello, ${person}`;
-};
+const greeter = (person: string) => `Hello, ${person}`;
 
 function testGreeter() {
     const user = "Kaho";
