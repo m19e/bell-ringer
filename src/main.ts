@@ -23,9 +23,8 @@ const main = () => {
         const message = messages[0];
         const record = [
             message.getDate(),
-            message.getFrom(),
             message.getSubject(),
-            message.getPlainBody().slice(0, 200),
+            message.getPlainBody(),
         ];
         values.push(record);
     }
