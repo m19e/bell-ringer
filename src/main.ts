@@ -1,3 +1,5 @@
+import "google-apps-script";
+
 const greeter = (person: string) => `Hello, ${person}`;
 
 function testGreeter() {
