@@ -22,6 +22,7 @@ const main = () => {
     for (const messages of messagesForThreads) {
         const message = messages[0];
         const record = [
+            message.getId(),
             message.getDate(),
             message.getSubject(),
             message.getPlainBody(),
