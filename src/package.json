@@ -1,10 +1,13 @@
 {
-  "name": "bell-ringer",
-  "version": "1.0.0",
-  "main": "main.ts",
-  "author": "m19e",
-  "license": "MIT",
-  "dependencies": {
-    "@types/google-apps-script": "^1.0.14"
-  }
+    "name": "bell-ringer",
+    "version": "1.0.0",
+    "main": "main.ts",
+    "author": "m19e",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/google-apps-script": "^1.0.14"
+    },
+    "dependencies": {
+        "typescript": "^3.9.5"
+    }
 }
