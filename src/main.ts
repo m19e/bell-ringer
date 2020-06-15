@@ -5,7 +5,7 @@ const main = () => {
         "TARGET_MAIL_ADDRESS"
     );
     const query = `from:${address}`;
-    const threads = GmailApp.search(query, 0, 10);
+    const threads = GmailApp.search(query, 0, 500);
     const messagesForThreads = GmailApp.getMessagesForThreads(threads);
 
     const values = [];
