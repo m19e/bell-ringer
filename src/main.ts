@@ -31,28 +31,4 @@ const main = () => {
         values[0].length,
     ];
     sheet.getRange(startRow, startCol, numRow, numCol).setValues(values);
-
-    padZeroTest();
-};
-
-const formatTime = (time: GoogleAppsScript.Base.Date): string => {
-    return `${time.getFullYear()}-${formatMMDD(
-        time
-    )} ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`;
-};
-
-const formatMMDD = (time: GoogleAppsScript.Base.Date): string => {
-    return `${padZero(time.getMonth() + 1)}-${padZero(time.getDate())}`;
-};
-
-const padZero = (t: number): string => {
-    return (t < 10 ? "0" : "") + `${t}`;
-};
-
-const padZeroTest = () => {
-    let arr: string[] = [];
-    for (let i = 0; i < 14; i++) {
-        arr.push(padZero(i));
-    }
-    Logger.log(arr.join(","));
 };
