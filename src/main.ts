@@ -20,7 +20,9 @@ const main = () => {
         values.push(record);
     }
 
+    let count: number = 0;
     for (const value of values) {
-        Logger.log(value);
+        count++;
+        Logger.log(`count: ${count}`, value[1], value[2]);
     }
 };
