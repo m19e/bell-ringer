@@ -1,28 +1,58 @@
 import "google-apps-script";
 
 const main = () => {
-    const address = PropertiesService.getScriptProperties().getProperty(
-        "TARGET_MAIL_ADDRESS"
-    );
-    const query = `from:${address}`;
+    const props = PropertiesService.getScriptProperties().getProperties();
+    const query = `from:${props["TARGET_MAIL_ADDRESS"]}`;
     const threads = GmailApp.search(query, 0, 500);
     const messagesForThreads = GmailApp.getMessagesForThreads(threads);
 
     const values = [];
     for (const messages of messagesForThreads) {
         const message = messages[0];
+        const time = message.getDate();
         const record = [
             message.getId(),
-            message.getDate(),
+            Utilities.formatDate(time, "JST", "yyyy-MM-dd HH:mm:ss"),
             message.getSubject(),
-            message.getPlainBody(),
+            // message.getPlainBody(),
+            "TEXT",
         ];
         values.push(record);
     }
 
-    let count: number = 0;
-    for (const value of values) {
-        count++;
-        Logger.log(`count: ${count}`, value[1], value[2]);
+    const sheet = SpreadsheetApp.openById(props["TARGET_SS_ID"]).getSheetByName(
+        "s1"
+    );
+
+    const [startRow, startCol, numRow, numCol] = [
+        2,
+        1,
+        values.length,
+        values[0].length,
+    ];
+    sheet.getRange(startRow, startCol, numRow, numCol).setValues(values);
+
+    padZeroTest();
+};
+
+const formatTime = (time: GoogleAppsScript.Base.Date): string => {
+    return `${time.getFullYear()}-${formatMMDD(
+        time
+    )} ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`;
+};
+
+const formatMMDD = (time: GoogleAppsScript.Base.Date): string => {
+    return `${padZero(time.getMonth() + 1)}-${padZero(time.getDate())}`;
+};
+
+const padZero = (t: number): string => {
+    return (t < 10 ? "0" : "") + `${t}`;
+};
+
+const padZeroTest = () => {
+    let arr: string[] = [];
+    for (let i = 0; i < 14; i++) {
+        arr.push(padZero(i));
     }
+    Logger.log(arr.join(","));
 };
