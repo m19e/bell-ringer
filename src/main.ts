@@ -3,6 +3,7 @@ import "google-apps-script";
 const main = () => {
     const props = PropertiesService.getScriptProperties().getProperties();
     const query = `from:${props["TARGET_MAIL_ADDRESS"]}`;
+    const ssid = props["TARGET_SS_ID"];
     const threads = GmailApp.search(query, 0, 500);
     const messagesForThreads = GmailApp.getMessagesForThreads(threads);
 
@@ -20,9 +21,7 @@ const main = () => {
         values.push(record);
     }
 
-    const sheet = SpreadsheetApp.openById(props["TARGET_SS_ID"]).getSheetByName(
-        "s1"
-    );
+    const sheet = SpreadsheetApp.openById(ssid).getSheetByName("s1");
 
     const [startRow, startCol, numRow, numCol] = [
         2,
