@@ -60,12 +60,12 @@ const main = () => {
     );
 };
 
-const checkWordInBody = (body: string, words: string[]): string => {
+const checkWordsInBody = (body: string, words: string[]): string => {
     for (const word of words) {
         if (body.includes(word)) {
-            Logger.log(`Match:${word}`)
-            return "TRUE"
+            Logger.log(`Match:${word}`);
+            return "TRUE";
         }
     }
-    return "FALSE"
+    return "FALSE";
 };
