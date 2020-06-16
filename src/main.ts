@@ -32,4 +32,28 @@ const main = () => {
         values[0].length,
     ];
     sheet.getRange(startRow, startCol, numRow, numCol).setValues(asc);
+
+    const resource = {
+        requests: [
+            {
+                repeatCell: {
+                    cell: {
+                        dataValidation: { condition: { type: "BOOLEAN" } },
+                    },
+                    range: {
+                        sheetId: sheet.getSheetId(),
+                        startRowIndex: 1,
+                        endRowIndex: numRow - 1,
+                        startColumnIndex: 4,
+                        endColumnIndex: 5,
+                    },
+                    fields: "dataValidation",
+                },
+            },
+        ],
+    };
+    Sheets.Spreadsheets.batchUpdate(
+        resource,
+        SpreadsheetApp.openById(ssid).getId()
+    );
 };
