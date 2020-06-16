@@ -43,7 +43,7 @@ const main = () => {
                     range: {
                         sheetId: sheet.getSheetId(),
                         startRowIndex: 1,
-                        endRowIndex: numRow - 1,
+                        endRowIndex: numRow + 1,
                         startColumnIndex: 4,
                         endColumnIndex: 5,
                     },
