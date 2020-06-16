@@ -63,7 +63,6 @@ const main = () => {
 const checkWordsInBody = (body: string, words: string[]): string => {
     for (const word of words) {
         if (body.includes(word)) {
-            Logger.log(`Match:${word}`);
             return "TRUE";
         }
     }
