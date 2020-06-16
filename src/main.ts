@@ -21,6 +21,8 @@ const main = () => {
         values.push(record);
     }
 
+    const asc = values.slice().reverse();
+
     const sheet = SpreadsheetApp.openById(ssid).getSheetByName("s1");
 
     const [startRow, startCol, numRow, numCol] = [
@@ -29,5 +31,5 @@ const main = () => {
         values.length,
         values[0].length,
     ];
-    sheet.getRange(startRow, startCol, numRow, numCol).setValues(values);
+    sheet.getRange(startRow, startCol, numRow, numCol).setValues(asc);
 };
