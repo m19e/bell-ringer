@@ -18,6 +18,7 @@ const main = () => {
             message.getSubject(),
             // message.getPlainBody(),
             "TEXT",
+            checkWordInBody(message.getPlainBody(), words),
         ];
         values.push(record);
     }
