@@ -4,6 +4,7 @@ const main = () => {
     const props = PropertiesService.getScriptProperties().getProperties();
     const query = `from:${props["TARGET_MAIL_ADDRESS"]}`;
     const ssid = props["TARGET_SS_ID"];
+    const words:string[] = props["TARGET_SEARCH_WORDS"].split(",")
     const threads = GmailApp.search(query, 0, 500);
     const messagesForThreads = GmailApp.getMessagesForThreads(threads);
 
