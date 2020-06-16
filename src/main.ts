@@ -7,7 +7,7 @@ const main = () => {
     const threads = GmailApp.search(query, 0, 500);
     const messagesForThreads = GmailApp.getMessagesForThreads(threads);
 
-    const values = [];
+    const values: string[][] = [];
     for (const messages of messagesForThreads) {
         const message = messages[0];
         const time = message.getDate();
