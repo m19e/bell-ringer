@@ -47,7 +47,7 @@ const main = () => {
                         startRowIndex: 1,
                         endRowIndex: numRow + 1,
                         startColumnIndex: 4,
-                        endColumnIndex: 5,
+                        endColumnIndex: 6,
                     },
                     fields: "dataValidation",
                 },
