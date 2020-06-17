@@ -12,6 +12,7 @@ const main = () => {
     for (const messages of messagesForThreads) {
         const message = messages[0];
         const time = message.getDate();
+        const attachs = message.getAttachments();
         const record = [
             message.getId(),
             Utilities.formatDate(time, "JST", "yyyy-MM-dd HH:mm:ss"),
@@ -19,6 +20,7 @@ const main = () => {
             // message.getPlainBody(),
             "TEXT",
             checkWordsInBody(message.getPlainBody(), words),
+            attachs.length != 0 ? "TRUE" : "FALSE",
         ];
         values.push(record);
     }
