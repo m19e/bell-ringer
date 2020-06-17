@@ -17,10 +17,9 @@ const main = () => {
             message.getId(),
             Utilities.formatDate(time, "JST", "yyyy-MM-dd HH:mm:ss"),
             message.getSubject(),
-            // message.getPlainBody(),
-            "TEXT",
-            checkWordsInBody(message.getPlainBody(), words),
             attachs.length != 0 ? "TRUE" : "FALSE",
+            checkWordsInBody(message.getPlainBody(), words),
+            `https://mail.google.com/mail/u/0/#all/${message.getId()}`,
         ];
         values.push(record);
     }
