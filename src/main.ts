@@ -24,6 +24,11 @@ const main = () => {
         values.push(record);
     }
 
+    PropertiesService.getScriptProperties().setProperty(
+        "LAST_ROW_NUMBER",
+        `${values.length + 1}`
+    );
+
     const asc = values.slice().reverse();
 
     const sheet = SpreadsheetApp.openById(ssid).getSheetByName("s1");
