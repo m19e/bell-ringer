@@ -68,6 +68,23 @@ const check = () => {
     Logger.log(values[0]);
 };
 
+const postDiscord = (msg: string) => {
+    const url = "YOUR_WEBHOOK_URL";
+    const pl = {
+        content: msg,
+    };
+
+    const params: GoogleAppsScript.URL_Fetch.URLFetchRequestOptions = {
+        method: "post",
+        headers: { "Content-type": "application/json" },
+        payload: JSON.stringify(pl),
+        muteHttpExceptions: true,
+    };
+
+    const res = UrlFetchApp.fetch(url, params);
+    Logger.log(res);
+}
+
 const main = () => {
     const props = PropertiesService.getScriptProperties().getProperties();
     const query: string = `from:${props["TARGET_MAIL_ADDRESS"]}`;
