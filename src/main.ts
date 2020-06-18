@@ -77,3 +77,12 @@ const checkWordsInBody = (body: string, words: string[]): string => {
     }
     return "FALSE";
 };
+
+// for test
+const decLastRowNum = () => {
+    const props = PropertiesService.getScriptProperties();
+    PropertiesService.getScriptProperties().setProperty(
+        "LAST_ROW_NUMBER",
+        `${+props.getProperty("LAST_ROW_NUMBER") - 1}`
+    );
+};
