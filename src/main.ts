@@ -10,18 +10,7 @@ const main = () => {
 
     const values: string[][] = [];
     for (const messages of messagesForThreads) {
-        const message = messages[0];
-        const time = message.getDate();
-        const attachs = message.getAttachments();
-        const record = [
-            message.getId(),
-            Utilities.formatDate(time, "JST", "yyyy-MM-dd HH:mm:ss"),
-            message.getSubject(),
-            attachs.length != 0 ? "TRUE" : "FALSE",
-            checkWordsInBody(message.getPlainBody(), words),
-            `https://mail.google.com/mail/u/0/#all/${message.getId()}`,
-        ];
-        values.push(record);
+        values.push(createValue(messages[0], words));
     }
 
     PropertiesService.getScriptProperties().setProperty(
@@ -64,6 +53,20 @@ const main = () => {
         resource,
         SpreadsheetApp.openById(ssid).getId()
     );
+};
+
+const createValue = (
+    message: GoogleAppsScript.Gmail.GmailMessage,
+    words: Array<string>
+): Array<string> => {
+    return [
+        message.getId(),
+        Utilities.formatDate(message.getDate(), "JST", "yyyy-MM-dd HH:mm:ss"),
+        message.getSubject(),
+        message.getAttachments().length != 0 ? "TRUE" : "FALSE",
+        checkWordsInBody(message.getPlainBody(), words),
+        `https://mail.google.com/mail/u/0/#all/${message.getId()}`,
+    ];
 };
 
 const checkWordsInBody = (body: string, words: string[]): string => {
