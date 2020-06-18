@@ -1,5 +1,73 @@
 import "google-apps-script";
 
+const check = () => {
+    // decLastRowNum();
+
+    const props = PropertiesService.getScriptProperties().getProperties();
+    const query: string = `from:${props["TARGET_MAIL_ADDRESS"]}`;
+    const ssid: string = props["TARGET_SS_ID"];
+    const words: string[] = props["TARGET_SEARCH_WORDS"].split(",");
+    const threads = GmailApp.search(query, 0, 1);
+    const messagesForThreads = GmailApp.getMessagesForThreads(threads);
+
+    // Logger.log(
+    //     "First:%s",
+    //     PropertiesService.getScriptProperties().getProperty["LAST_ROW_NUMBER"]
+    // );
+
+    const latest: GoogleAppsScript.Gmail.GmailMessage =
+        messagesForThreads[0][0];
+
+    const sheet = SpreadsheetApp.openById(ssid).getSheetByName("s1");
+    const lastRowID: string = sheet
+        .getRange(`A${props["LAST_ROW_NUMBER"]}`)
+        .getValue();
+
+    if (latest.getId() == lastRowID) {
+        Logger.log("Same ID! Bye!");
+        return;
+    }
+
+    const values: string[][] = [createValue(latest, words)];
+
+    const startRow: number = +props["LAST_ROW_NUMBER"] + 1;
+    const [startCol, numRow, numCol] = [1, values.length, values[0].length];
+
+    sheet.getRange(startRow, startCol, numRow, numCol).setValues(values);
+
+    const resource = {
+        requests: [
+            {
+                repeatCell: {
+                    cell: {
+                        dataValidation: { condition: { type: "BOOLEAN" } },
+                    },
+                    range: {
+                        sheetId: sheet.getSheetId(),
+                        startRowIndex: +props["LAST_ROW_NUMBER"],
+                        endRowIndex: startRow,
+                        startColumnIndex: 3,
+                        endColumnIndex: 5,
+                    },
+                    fields: "dataValidation",
+                },
+            },
+        ],
+    };
+    Sheets.Spreadsheets.batchUpdate(
+        resource,
+        SpreadsheetApp.openById(ssid).getId()
+    );
+
+    PropertiesService.getScriptProperties().setProperty(
+        "LAST_ROW_NUMBER",
+        "" + startRow
+    );
+
+    Logger.log("You've got mail!");
+    Logger.log(values[0]);
+};
+
 const main = () => {
     const props = PropertiesService.getScriptProperties().getProperties();
     const query: string = `from:${props["TARGET_MAIL_ADDRESS"]}`;
