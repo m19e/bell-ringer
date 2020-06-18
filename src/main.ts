@@ -64,8 +64,9 @@ const check = () => {
         "" + startRow
     );
 
-    Logger.log("You've got mail!");
-    Logger.log(values[0]);
+    // postDiscord(`some info`);
+
+    Logger.log(`You\'ve got mail!`, values[0]);
 };
 
 const postDiscord = (msg: string) => {
