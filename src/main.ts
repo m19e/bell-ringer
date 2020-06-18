@@ -10,11 +10,6 @@ const check = () => {
     const threads = GmailApp.search(query, 0, 1);
     const messagesForThreads = GmailApp.getMessagesForThreads(threads);
 
-    // Logger.log(
-    //     "First:%s",
-    //     PropertiesService.getScriptProperties().getProperty["LAST_ROW_NUMBER"]
-    // );
-
     const latest: GoogleAppsScript.Gmail.GmailMessage =
         messagesForThreads[0][0];
 
