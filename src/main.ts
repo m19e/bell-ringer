@@ -84,7 +84,7 @@ const postDiscord = (msg: string) => {
 
     const res = UrlFetchApp.fetch(url, params);
     Logger.log(res);
-}
+};
 
 const main = () => {
     const props = PropertiesService.getScriptProperties().getProperties();
