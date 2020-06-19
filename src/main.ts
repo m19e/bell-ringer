@@ -138,8 +138,8 @@ const main = () => {
 
 const createValue = (
     message: GoogleAppsScript.Gmail.GmailMessage,
-    words: Array<string>
-): Array<string> => {
+    words: string[]
+): string[] => {
     return [
         message.getId(),
         Utilities.formatDate(message.getDate(), "JST", "yyyy-MM-dd HH:mm:ss"),
